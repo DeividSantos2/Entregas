@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão que Muda de Lugar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .cabecalho {
+            position: fixed;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .botao {
+            position: absolute;
+            padding: 12px 24px;
+            background-color: #611d99;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="cabecalho">
+        <h1>Clique no botão</h1>
+    </div>
+    
+    <button class="botao" id="botaoMovel">Clique Aqui</button>
+
+    <script>
+        const botao = document.getElementById('botaoMovel');
+        
+        function posicionarBotaoCentro() {
+            const larguraJanela = window.innerWidth;
+            const alturaJanela = window.innerHeight;
+            const larguraBotao = botao.offsetWidth;
+            const alturaBotao = botao.offsetHeight;
+            
+            botao.style.left = (larguraJanela / 2 - larguraBotao / 2) + 'px';
+            botao.style.top = (alturaJanela / 2 - alturaBotao / 2) + 'px';
+        }
+        
+        function moverBotaoAleatorio() {
+            const larguraJanela = window.innerWidth;
+            const alturaJanela = window.innerHeight;
+            const larguraBotao = botao.offsetWidth;
+            const alturaBotao = botao.offsetHeight;
+            
+            const margem = 20;
+            
+            const novaX = Math.random() * (larguraJanela - larguraBotao - 2 * margem) + margem;
+            const novaY = Math.random() * (alturaJanela - alturaBotao - 2 * margem) + margem;
+            
+            botao.style.left = novaX + 'px';
+            botao.style.top = novaY + 'px';
+        }
+        
+        window.onload = function() {
+            setTimeout(posicionarBotaoCentro, 100);
+        };
+        
+        window.addEventListener('resize', posicionarBotaoCentro);
+        
+        botao.addEventListener('mouseenter', moverBotaoAleatorio);
+        
+        botao.addEventListener('click', function() {
+            alert('Você clicou no botão!');
+        });
+    </script>
+</body>
+</html>
